@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiSharingData = axios.create({
-  baseURL: "http://localhost:3002"
+  baseURL: "https://test-api-sharing-data.herokuapp.com/"
 })
 
 export default apiSharingData

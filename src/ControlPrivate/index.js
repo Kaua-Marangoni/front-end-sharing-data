@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 import Loader from "react-spinners/ClipLoader"
 import { toast } from "react-toastify"
 
@@ -78,6 +78,10 @@ const App = () => {
     }
   }
 
+  const goPageEdit = userId => {
+    navigate({ pathname: `/edit-user/${userId}` })
+  }
+
   const deleteUser = async userId => {
     setLoading(true)
     await api.delete(`numbers/${userId}`)
@@ -96,6 +100,20 @@ const App = () => {
       user.name.toLowerCase().includes(lowerSearch) ||
       onlyNumbers(user.number).includes(lowerSearch)
   )
+
+  const titleize = text => {
+    const loweredText = text.toLowerCase()
+    const words = loweredText.split(" ")
+    for (let a = 0; a < words.length; a++) {
+      let w = words[a]
+
+      const firstLetter = w[0]
+      w = firstLetter.toUpperCase() + w.slice(1)
+
+      words[a] = w
+    }
+    return words.join(" ")
+  }
 
   return (
     <Container>
@@ -137,13 +155,19 @@ const App = () => {
           {usersFiltered.map(user => (
             <User key={user.id}>
               <Data>
-                <NameUser>{user.name}</NameUser>
+                <NameUser>{titleize(user.name)}</NameUser>
                 <Number>{user.number}</Number>
               </Data>
-              <i
-                onClick={() => deleteUser(user.id)}
-                className="far fa-trash-alt"
-              ></i>
+              <div className="icons">
+                <i
+                  onClick={() => goPageEdit(user.id)}
+                  className="fas fa-pencil-alt"
+                ></i>
+                <i
+                  onClick={() => deleteUser(user.id)}
+                  className="far fa-trash-alt"
+                ></i>
+              </div>
             </User>
           ))}
         </ul>

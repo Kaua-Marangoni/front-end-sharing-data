@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
 import InputMask from "react-input-mask"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import ImageHeader from "../assets/header-image.png"
@@ -20,22 +21,17 @@ const App = () => {
   const [users, setUsers] = useState([])
   const navigate = useNavigate()
 
-  const inputName = useRef()
-  const inputNumber = useRef()
+  const { register, handleSubmit } = useForm({})
 
-  const addNewUser = async () => {
+  const onSubmit = async clientData => {
     const onlyNumbers = str => str.replace(/[^0-9]/g, "")
-
-    if (
-      inputName.current.value <= 0 ||
-      onlyNumbers(inputNumber.current.value).length <= 10
-    ) {
+    if (clientData.name <= 0 || onlyNumbers(clientData.number).length <= 10) {
       toast.warning("Os campos são obrigatórios!")
     } else {
       const { data: newUser } = await toast.promise(
         api.post("numbers", {
-          name: inputName.current.value,
-          number: inputNumber.current.value
+          name: clientData.name,
+          number: clientData.number
         }),
         {
           pending: "Enviando Dados",
@@ -49,10 +45,6 @@ const App = () => {
     }
   }
 
-  const goPageUsers = () => {
-    navigate("/users")
-  }
-
   return (
     <Container>
       <Image src={ImageHeader} alt="Imagem Inicial" />
@@ -60,21 +52,28 @@ const App = () => {
       <ContainerItens>
         <H1>Conecte-se</H1>
 
-        <InputLabel>Nome</InputLabel>
-        <Input ref={inputName} type="text" placeholder="Ex: João da Silva" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputLabel>Nome</InputLabel>
+          <Input
+            type="text"
+            placeholder="Ex: João da Silva"
+            {...register("name")}
+          />
 
-        <InputLabel>Número</InputLabel>
+          <InputLabel>Número</InputLabel>
+          <InputMask
+            mask="(99) 99999-9999"
+            className="input"
+            placeholder="Ex: (xx) xxxxx-xxxx"
+            {...register("number")}
+          />
 
-        <InputMask
-          mask="(99) 99999-9999"
-          className="input"
-          ref={inputNumber}
-          placeholder="Ex: (xx) xxxxx-xxxx"
-        />
+          <Button type="submit">Adicionar</Button>
 
-        <Button onClick={addNewUser}>Adicionar</Button>
-
-        <ButtonGoNumbers onClick={goPageUsers}>Ver Números</ButtonGoNumbers>
+          <ButtonGoNumbers onClick={() => navigate("/users")}>
+            Ver Números
+          </ButtonGoNumbers>
+        </form>
       </ContainerItens>
     </Container>
   )

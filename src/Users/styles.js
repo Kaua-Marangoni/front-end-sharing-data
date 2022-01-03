@@ -126,6 +126,7 @@ export const ContainerItens = styled.div`
   ul {
     overflow: auto;
     height: 78vh;
+    width: 383px;
     padding-right: 5px;
 
     @media (max-width: 970px) {
@@ -243,7 +244,7 @@ export const ButtonGoHome = styled.button`
 
   transition: all 0.1s;
 
-  width: 342px;
+  width: 100%;
   height: 68px;
 
   border-radius: 14px;
@@ -264,8 +265,47 @@ export const ButtonGoHome = styled.button`
     opacity: 0.6;
   }
 
-  @media (max-width: 920px) {
+  @media (max-width: 970px) {
     width: 100%;
     margin-bottom: 10px;
+  }
+`
+
+export const ContainerQuestion = styled.div`
+  .div-question {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 25px;
+    border: 2px solid #6ab04c;
+    background-color: #fff;
+    width: 55px;
+    overflow: hidden;
+    height: 55px;
+    padding: 5px 15px 5px 10px;
+    transition: all 0.5s;
+  }
+
+  &:hover .div-question {
+    width: 255px;
+  }
+`
+
+export const ButtonQuestion = styled.button`
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid #6ab04c;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 999;
+`
+
+export const PQuestion = styled.p`
+  a {
+    color: #218c74;
+    font-weight: 700;
   }
 `

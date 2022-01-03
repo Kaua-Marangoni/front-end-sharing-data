@@ -159,6 +159,17 @@ export const User = styled.div`
   width: 342px;
   height: 101px;
 
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .fa-pencil-alt {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
   .fa-trash-alt {
     margin-right: 25px;
     font-size: 25px;
@@ -198,6 +209,70 @@ export const Loading = styled.div`
   transform: translate(-50%, -50%);
 `
 
+export const I = styled.i`
+  position: absolute;
+  padding: 5px;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+`
+
+export const InputModal = styled.input`
+  width: 100%;
+  height: 58px;
+
+  display: block;
+  padding-left: 15px;
+  margin-bottom: 15px;
+
+  background: #ffffff99;
+  border-radius: 14px;
+  border: 1px solid #000;
+  outline: none;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+`
+
+export const ButtonLogin = styled.button`
+  background: #27ac59;
+  color: #ffffff;
+
+  transition: all 0.1s;
+
+  float: right;
+  margin-bottom: 10px;
+  width: 80px;
+  height: 50px;
+
+  border-radius: 14px;
+  border: none;
+  outline: none;
+
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 2px;
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+`
+
+export const Label = styled.p`
+  margin-top: 20px;
+  margin-left: 10px;
+`
+
 export const ButtonGoHome = styled.button`
   background: #ac8f27;
   color: #ffffff;
@@ -206,7 +281,7 @@ export const ButtonGoHome = styled.button`
 
   transition: all 0.1s;
 
-  width: 342px;
+  width: 100%;
   height: 68px;
 
   border-radius: 14px;
