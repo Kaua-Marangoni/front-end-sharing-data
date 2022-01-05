@@ -74,7 +74,7 @@ const App = () => {
   }
 
   const goPageAdmin = async () => {
-    if (password === " ") {
+    if (password === "screen-private") {
       toast.success("Sucesso!")
 
       await sessionStorage.setItem("sharing-data:password", "passwordCorrect")
